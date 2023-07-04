@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IUser } from "../models/IUser";
+import * as _ from 'lodash'
 
 @Injectable()
 export class UsersService {
@@ -242,15 +243,21 @@ export class UsersService {
 
 
   public getUser( id: number ): IUser  {
-    return this.users.find( user => user.id === id );
+    return _.find(this.users, { id } );
   }
 
-  public addUser( user: IUser ){
-    this.users.push(user)
+  public addUser( user: IUser ): IUser{
+    const newUser ={
+      id: _.random(100),
+      ...user
+    }
+    this.users.push(newUser)
+    return newUser
   }
 
   public updateUser( id: number, user: IUser ){
-    this.users = this.users.map( u => u.id === id ? { ...u, ...user } : { ...u } )
+    this.users = _.map(this.users, u => u.id === id ? { ...u, ...user } : { ...u } )
+    return _.find( this.users, { id } )
   }
 
 }
