@@ -24,10 +24,14 @@ export class UsersService {
     return newUser;
   }
 
-  public updateUser(id: number, user: IUser) {
+  public updateUser(id: number, user: IUser): IUser {
     this.users = _.map(this.users, (u) =>
       u.id === id ? { ...u, ...user } : { ...u },
     );
     return _.find(this.users, { id });
+  }
+
+  public getTotal(): { total: number } {
+    return { total: this.users.length }
   }
 }
