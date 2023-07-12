@@ -34,4 +34,8 @@ export class UsersService {
   public getTotal(): { total: number } {
     return { total: this.users.length }
   }
+  public deleteUser(id: number): IUser[] {
+    this.users = _.reject( this.users, { id } )
+    return this.users
+  }
 }
