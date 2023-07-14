@@ -16,7 +16,7 @@ export class UsersService {
   }
 
   public addUser(user: IUser): IUser {
-    const newUser = {
+    const newUser: IUser = {
       id: _.random(100),
       ...user,
     };
