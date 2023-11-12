@@ -35,4 +35,9 @@ export class UsersController {
   deleteUser(@Param('id') id: string ): IUser[] {
     return this.usersService.deleteUser(+id)
   }
+
+  @Post('search')
+  search( @Body() search: { search: string } ): IUser[] {
+    return this.usersService.search( search );
+  }
 }

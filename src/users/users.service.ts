@@ -38,4 +38,11 @@ export class UsersService {
     this.users = _.reject( this.users, { id } )
     return this.users
   }
+
+  public search( { search }: { search: string } ): IUser[] {
+    return  _.filter( this.users, ( user ) =>
+      _.some( user , ( v: any ) =>
+        _.includes( _.toLower(v), _.toLower(search) ) )
+    )
+  }
 }
